@@ -2,11 +2,15 @@ require("dotenv").config({ path: "./.env" });
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const server = createServer();
-const socket = new Server(server, {});
+const socket = new Server(server, {
+    cors: {
+        origin: 'http://127.0.0.1:5500'
+    }
+});
 socket.on("connection", (socket) => {
   console.log(socket);
 });
 
 server.listen(process.env.PORT, () =>
-  console.log(`The server is running on ${PORT}`)
+  console.log(`The server is running on ${process.env.PORT}`)
 );
